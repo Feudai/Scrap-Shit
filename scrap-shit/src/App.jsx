@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/*
+ * APP.JSX — Root component
+ *
+ * In vanilla, index.html held all sections inline.
+ * In React, each section becomes its own component.
+ * This file is just the "layout" — it decides WHAT
+ * shows up and in WHAT ORDER. Nothing else.
+ */
+
+import Header from './components/Header/Header';
+import Hero from './components/Hero/Hero';
+import WorkGrid from './components/WorkGrid/WorkGrid';
+import Section from './components/Section/Section';
+import Footer from './components/Footer/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+
+      <main>
+        <Hero />
+
+        <WorkGrid />
+
+        <Section id="about" title="About" alt>
+          <p>Your story goes here.</p>
+        </Section>
+
+        <Section id="contact" title="Get in Touch">
+          <a href="mailto:hello@yourdomain.com" className="btn btn--primary">
+            Say Hello
+          </a>
+        </Section>
+      </main>
+
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

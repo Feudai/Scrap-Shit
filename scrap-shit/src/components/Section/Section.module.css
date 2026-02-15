@@ -1,0 +1,11 @@
+.section {
+  padding: var(--space-section) 0;
+}
+
+.alt {
+  background-color: var(--color-surface);
+}
+
+.title {
+  margin-bottom: var(--space-lg);
+}

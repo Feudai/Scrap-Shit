@@ -1,0 +1,132 @@
+/*
+ * HEADER.MODULE.CSS
+ *
+ * LEARNING POINT:
+ * This is a "CSS Module". Vite scopes these class names
+ * automatically so they never clash with other components.
+ *
+ * In vanilla, you had to be careful with naming (.nav__logo
+ * vs .card__title). With CSS Modules, you can just use
+ * .logo and .title freely — they're scoped per-component.
+ *
+ * You import them as: import styles from './Header.module.css'
+ * Then use as: className={styles.logo}
+ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: var(--space-sm) 0;
+  transition: background-color var(--duration-normal) var(--ease-out),
+              backdrop-filter var(--duration-normal) var(--ease-out);
+}
+
+.scrolled {
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.links a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile menu button */
+.menuBtn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+}
+
+.menuBtn span {
+  display: block;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform var(--duration-normal) var(--ease-out),
+              opacity var(--duration-fast);
+}
+
+/* Animated hamburger → X */
+.menuBtnOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menuBtnOpen span:nth-child(2) {
+  opacity: 0;
+}
+.menuBtnOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+    /* When open, show as a full-screen overlay or slide-in drawer */
+  }
+
+  .linksOpen {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    z-index: 99;
+  }
+
+  .linksOpen a {
+    font-size: 1.8rem;
+  }
+
+  .menuBtn {
+    display: flex;
+    z-index: 101;
+  }
+}

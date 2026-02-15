@@ -1,0 +1,13 @@
+.section {
+  padding: var(--space-section) 0;
+}
+
+.title {
+  margin-bottom: var(--space-lg);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+}

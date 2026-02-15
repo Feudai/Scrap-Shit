@@ -1,16 +1,72 @@
-# React + Vite
+# My Web App — React Structure
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting started
 
-Currently, two official plugins are available:
+```bash
+npm install
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Then open http://localhost:5173 in your browser.
 
-## React Compiler
+## Folder layout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+my-webapp/
+├── index.html                          ← Vite entry (just a shell)
+├── vite.config.js                      ← Vite config
+├── package.json
+├── public/
+│   └── placeholder.svg                 ← Static files served at root /
+└── src/
+    ├── main.jsx                        ← React entry point
+    ├── App.jsx                         ← Root layout component
+    ├── components/
+    │   ├── Header/
+    │   │   ├── Header.jsx              ← Component logic
+    │   │   └── Header.module.css       ← Scoped styles
+    │   ├── Hero/
+    │   │   ├── Hero.jsx
+    │   │   └── Hero.module.css
+    │   ├── Card/
+    │   │   ├── Card.jsx
+    │   │   └── Card.module.css
+    │   ├── WorkGrid/
+    │   │   ├── WorkGrid.jsx
+    │   │   └── WorkGrid.module.css
+    │   ├── Section/
+    │   │   ├── Section.jsx
+    │   │   └── Section.module.css
+    │   └── Footer/
+    │       ├── Footer.jsx
+    │       └── Footer.module.css
+    ├── hooks/
+    │   ├── useInView.js                ← Scroll detection hook
+    │   └── useScrolled.js              ← Header scroll hook
+    ├── styles/
+    │   ├── global.css                  ← Design tokens + reset
+    │   └── shared.css                  ← Container, buttons
+    ├── assets/                         ← Imported images/fonts
+    └── utils/                          ← Shared helper functions
+```
 
-## Expanding the ESLint configuration
+## Vanilla → React translation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Vanilla (what you had)            | React (what you have now)             |
+|-----------------------------------|---------------------------------------|
+| `base.css` design tokens          | `global.css` — identical              |
+| `layout.css` / `components.css`   | `*.module.css` per component          |
+| `scroll.js` IntersectionObserver  | `useInView.js` hook + Framer Motion   |
+| `header.js` scroll listener       | `useScrolled.js` hook                 |
+| `menu.js` toggle class            | `useState()` inside Header            |
+| Copy-paste HTML for each card     | `<Card />` component with props       |
+| Sections in index.html            | `<Section />` wrapper component       |
+| `app.js` imports & inits          | `App.jsx` composes components         |
+
+## Key React concepts used
+
+- **Props**: Pass data to components (`<Card title="..." />`)
+- **State**: `useState()` for interactive values (menu open/close)
+- **Hooks**: `useScrolled`, `useInView` — reusable behavior
+- **CSS Modules**: Scoped styles, no class name conflicts
+- **Framer Motion**: Declarative animations (`initial` → `animate`)
